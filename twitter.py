@@ -15,7 +15,6 @@ def main():
     previous_tree = ET.fromstring(previous_atom)[0].findall('item')
     current_tree = ET.parse('_site/atom.xml').getroot()[0].findall('item')
     previous_title = previous_tree[0].find('title').text
-    print(previous_tree)
     current_title = current_tree[0].find('title').text
 
     i = 0
