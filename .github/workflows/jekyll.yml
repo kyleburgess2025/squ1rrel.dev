@@ -51,6 +51,13 @@ jobs:
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v1
+      - name: Post to Twitter
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
+        run: pip3 install tweepy ; python3 twitter.py
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v2
