@@ -19,6 +19,8 @@ def main():
 
     i = 0
     new_articles = []
+    print(previous_title)
+    print(current_title)
 
     while previous_title != current_title:
         print("Different!")
