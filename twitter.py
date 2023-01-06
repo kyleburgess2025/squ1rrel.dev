@@ -5,21 +5,17 @@ import os
 
 def main():
     client = tweepy.Client(
-        consumer_key=os.getenv("API_KEY"),
-        consumer_secret=os.getenv("SECRET_KEY"),
-        access_token=os.getenv("ACCESS_TOKEN"),
-        access_token_secret=os.getenv("ACCESS_SECRET")
+        consumer_key=os.environ["API_KEY"],
+        consumer_secret=os.environ["SECRET_KEY"],
+        access_token=os.environ["ACCESS_TOKEN"],
+        access_token_secret=os.environ["ACCESS_SECRET"]
     )
 
     previous_atom = requests.get("https://squ1rrel.dev/atom.xml", allow_redirects=True).text
     previous_links = [i.find("link").text.strip() for i in ET.fromstring(previous_atom)[0].findall('item')]
     current_links = [i.find("link").text.strip() for i in ET.parse('_site/atom.xml').getroot()[0].findall('item')]
 
-    i = 0
     new_articles = list(set(current_links) - set(previous_links))
-    print(new_articles)
-    print(current_links)
-    print(previous_links)
 
     if len(new_articles) > 0:
         if len(new_articles) == 1:
