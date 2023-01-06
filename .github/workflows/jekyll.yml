@@ -64,7 +64,7 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
-        run: python3 twitter.py
+        run: python3 .github/twitter.py
         shell: bash
       - name: Setup Pages
         id: pages
