@@ -17,6 +17,9 @@ def main():
 
     i = 0
     new_articles = list(set(current_links) - set(previous_links))
+    print(new_articles)
+    print(current_links)
+    print(previous_links)
 
     if len(new_articles) > 0:
         if len(new_articles) == 1:
