@@ -12,21 +12,11 @@ def main():
     )
 
     previous_atom = requests.get("https://squ1rrel.dev/atom.xml", allow_redirects=True).text
-    previous_tree = ET.fromstring(previous_atom)[0].findall('item')
-    current_tree = ET.parse('_site/atom.xml').getroot()[0].findall('item')
-    previous_title = previous_tree[0].find('title').text
-    current_title = current_tree[0].find('title').text
+    previous_links = [i.find("link").text.strip() for i in ET.fromstring(previous_atom)[0].findall('item')]
+    current_links = [i.find("link").text.strip() for i in ET.parse('_site/atom.xml').getroot()[0].findall('item')]
 
     i = 0
-    new_articles = []
-    print(previous_title)
-    print(current_title)
-
-    while previous_title != current_title:
-        print("Different!")
-        new_articles.append(f'https://squ1rrel.dev{current_tree[i].find("link").text.strip()}')
-        i += 1
-        current_title = current_tree[i].find('title').text
+    new_articles = list(set(current_links) - set(previous_links))
 
     if len(new_articles) > 0:
         if len(new_articles) == 1:
